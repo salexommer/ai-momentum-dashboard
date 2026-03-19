@@ -61,17 +61,25 @@
     });
   }
 
-  /* ---------- Chart Insights ---------- */
-  var CHART_INSIGHTS = {
-    expectations: 'Most participants correctly identified that AI doesn\'t truly understand language. The splits on nuanced statements show a healthy mix of critical thinking — exactly the foundation the programme aims to build.',
-    spectrum: '56% of participants self-assessed at Level 3 (Thinking Partner), suggesting this cohort is more advanced than typical starting populations. Only 2% are at the basic Search Engine level, indicating strong existing familiarity with AI.',
-    blockers: 'Time is the dominant barrier at 39%, not trust or skills gaps. 30% report they\'re already using AI well — the real challenge is expansion and deepening, not initial adoption.',
-    shifts: 'The Expertise Shift resonated most strongly (59%), indicating the biggest mindset barrier is feeling they need to be experts before starting. Permission to learn by doing is the most impactful reframe.',
-    use: 'Writing & Content and Data & Analysis dominate, aligning closely with the pre-programme AI Survey (38% content creation, 24% research). The diversity across 9 themes shows AI potential is recognised across every function.',
-    stopping: 'Time and tooling issues outweigh trust or skills concerns — participants want to use AI but face practical barriers. This directly informs the design of Topics 2-4 and Adoption Group priorities.',
-    actions: '81% committed to the Verification Question (alone or combined), showing strong buy-in for the critical thinking habit. This is the programme\'s most important behavioural outcome.',
-    reflection: '72% report using AI regularly or confidently, while 28% are still experimenting or earlier. This validates the programme\'s multi-level approach of meeting people where they are on the AI Spectrum.',
-  };
+  /* ---------- Sticky Tooltip Plugin ---------- */
+  Chart.register({
+    id: 'stickyTooltip',
+    beforeEvent: function (chart, args) {
+      var event = args.event;
+      if (event.type === 'click') {
+        var elements = chart.getElementsAtEventForMode(event.native, 'nearest', { intersect: true }, false);
+        if (elements.length > 0) {
+          chart._stickyActive = !chart._stickyActive;
+        } else {
+          chart._stickyActive = false;
+        }
+        return;
+      }
+      if (chart._stickyActive && (event.type === 'mousemove' || event.type === 'mouseout')) {
+        return false;
+      }
+    },
+  });
 
   /* ---------- State ---------- */
   let config = null;
@@ -472,18 +480,6 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            var expLabels = expectations.map(function (e) { return e.statement.length > 50 ? e.statement.substring(0, 50) + '...' : e.statement; });
-            var expTotals = expectations.map(function (e) { return e.total; });
-            var grandTotal = expTotals.reduce(function (a, b) { return a + b; }, 0);
-            toggleDetailPanel('expectations', document.getElementById('expectations').querySelector('.chart-card'), {
-              labels: expLabels,
-              values: expTotals,
-              total: grandTotal,
-            }, CHART_INSIGHTS.expectations);
-          }
-        },
         scales: {
           x: {
             grid: { display: true, color: chartGridColor },
@@ -604,15 +600,6 @@
         responsive: true,
         maintainAspectRatio: true,
         cutout: '68%',
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            toggleDetailPanel('spectrum', document.getElementById('spectrum-chart').closest('.chart-card'), {
-              labels: labels,
-              values: counts,
-              total: total,
-            }, CHART_INSIGHTS.spectrum);
-          }
-        },
         plugins: {
           tooltip: {
             callbacks: {
@@ -673,15 +660,6 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            toggleDetailPanel('blockers', document.getElementById('blockers-chart').closest('.chart-card'), {
-              labels: labels,
-              values: counts,
-              total: total,
-            }, CHART_INSIGHTS.blockers);
-          }
-        },
         scales: {
           x: { grid: { display: true, color: chartGridColor }, ticks: { stepSize: 10 } },
           y: {
@@ -787,7 +765,6 @@
 
     destroyChart('use');
     var ctx = document.getElementById('use-chart').getContext('2d');
-    var useTotalCount = counts.reduce(function (a, b) { return a + b; }, 0);
     charts.use = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -804,15 +781,6 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            toggleDetailPanel('use', document.getElementById('use-cases').querySelector('.chart-card'), {
-              labels: labels,
-              values: counts,
-              total: useTotalCount,
-            }, CHART_INSIGHTS.use);
-          }
-        },
         scales: {
           x: { grid: { display: true, color: chartGridColor } },
           y: { grid: { display: false }, ticks: { font: { size: 13 } } },
@@ -864,7 +832,6 @@
 
     destroyChart('stopping');
     var ctx = document.getElementById('stopping-chart').getContext('2d');
-    var stoppingTotalCount = counts.reduce(function (a, b) { return a + b; }, 0);
     charts.stopping = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -881,15 +848,6 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            toggleDetailPanel('stopping', document.getElementById('stopping').querySelector('.chart-card'), {
-              labels: labels,
-              values: counts,
-              total: stoppingTotalCount,
-            }, CHART_INSIGHTS.stopping);
-          }
-        },
         scales: {
           x: { grid: { display: true, color: chartGridColor } },
           y: { grid: { display: false }, ticks: { font: { size: 13 } } },
@@ -1000,59 +958,6 @@
     return div.innerHTML;
   }
 
-  /* --- Sticky Chart Detail Panel --- */
-  function toggleDetailPanel(key, container, data, insight) {
-    var existing = container.querySelector('.chart-detail-panel');
-    if (existing) {
-      existing.remove();
-      return;
-    }
-
-    var panel = document.createElement('div');
-    panel.className = 'chart-detail-panel';
-
-    var showAll = data.labels.length <= 5;
-    var valuesHtml = '<div class="detail-values">';
-    data.labels.forEach(function (label, i) {
-      var pctVal = pct(data.values[i], data.total);
-      var hiddenClass = (!showAll && i >= 3) ? ' detail-value-hidden' : '';
-      valuesHtml +=
-        '<div class="detail-value-row' + hiddenClass + '">' +
-        '<span class="detail-value-label">' + escapeHtml(label) + '</span>' +
-        '<span class="detail-value-bar"><span class="detail-value-fill" style="width:' + pctVal + '%"></span></span>' +
-        '<span class="detail-value-num">' + data.values[i] + ' (' + pctVal + '%)</span>' +
-        '</div>';
-    });
-    if (!showAll) {
-      valuesHtml += '<button class="detail-expand-btn">Show all ' + data.labels.length + ' values</button>';
-    }
-    valuesHtml += '</div>';
-
-    var insightHtml =
-      '<div class="detail-insight">' +
-      '<div class="detail-insight-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>' +
-      '<p class="detail-insight-text">' + insight + '</p>' +
-      '</div>';
-
-    var closeHtml = '<button class="detail-close-btn" aria-label="Close">&times;</button>';
-
-    panel.innerHTML = closeHtml + valuesHtml + insightHtml;
-    container.appendChild(panel);
-
-    panel.querySelector('.detail-close-btn').addEventListener('click', function () {
-      panel.remove();
-    });
-
-    var expandBtn = panel.querySelector('.detail-expand-btn');
-    if (expandBtn) {
-      expandBtn.addEventListener('click', function () {
-        panel.querySelectorAll('.detail-value-hidden').forEach(function (el) {
-          el.classList.remove('detail-value-hidden');
-        });
-        expandBtn.remove();
-      });
-    }
-  }
 
   /* --- Atomic Actions Donut --- */
   function renderAtomicActions() {
@@ -1095,15 +1000,6 @@
         responsive: true,
         maintainAspectRatio: true,
         cutout: '68%',
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            toggleDetailPanel('actions', document.getElementById('actions-chart').closest('.chart-card'), {
-              labels: labels,
-              values: counts,
-              total: total,
-            }, CHART_INSIGHTS.actions);
-          }
-        },
         plugins: {
           tooltip: {
             callbacks: {
@@ -1168,15 +1064,6 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
-        onClick: function (event, elements) {
-          if (elements.length > 0) {
-            toggleDetailPanel('reflection', document.getElementById('reflection-chart').closest('.chart-card'), {
-              labels: labels,
-              values: counts,
-              total: total,
-            }, CHART_INSIGHTS.reflection);
-          }
-        },
         scales: {
           x: { grid: { display: true, color: chartGridColor } },
           y: {

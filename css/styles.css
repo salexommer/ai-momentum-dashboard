@@ -1542,6 +1542,19 @@ body {
   .ring-number {
     color: var(--text-primary);
   }
+
+  .footer {
+    background: #0F0F1A;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .footer-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .footer-logo--personio {
+    filter: brightness(0) invert(1);
+  }
 }
 
 @media (max-width: 640px) {
