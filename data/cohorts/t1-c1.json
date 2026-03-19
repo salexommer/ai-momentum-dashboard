@@ -1,0 +1,486 @@
+{
+  "cohort_id": "t1-c1",
+  "topic": "AI Foundations",
+  "topic_number": 1,
+  "date": "2026-03-18",
+  "registered": 238,
+  "poll_participants": 145,
+  "evaluation_respondents": 47,
+  "expectations": [
+    {
+      "statement": "AI can reliably summarise a 40-page document without missing key details.",
+      "correct_answer": "It Depends",
+      "responses": {
+        "True": 41,
+        "False": 21,
+        "It Depends": 83
+      },
+      "total": 145
+    },
+    {
+      "statement": "AI understands what it writes.",
+      "correct_answer": "False",
+      "responses": {
+        "True": 19,
+        "False": 96,
+        "It Depends": 28
+      },
+      "total": 143
+    },
+    {
+      "statement": "AI is only useful if you work in a technical role.",
+      "correct_answer": "False",
+      "responses": {
+        "True": 0,
+        "False": 132,
+        "It Depends": 3
+      },
+      "total": 135
+    },
+    {
+      "statement": "If AI gives you a wrong answer, it's because you asked the wrong question.",
+      "correct_answer": "Partly True",
+      "responses": {
+        "True": 2,
+        "Partly True": 100,
+        "False": 27
+      },
+      "total": 129
+    },
+    {
+      "statement": "Companies that adopt AI effectively will outperform those that don't.",
+      "correct_answer": "It Depends",
+      "responses": {
+        "True": 88,
+        "False": 2,
+        "It Depends": 41
+      },
+      "total": 131
+    }
+  ],
+  "ai_spectrum": {
+    "responses": {
+      "L1 - Search Engine": 2,
+      "L2 - First Draft": 35,
+      "L3 - Thinking Partner": 70,
+      "L4 - Workflow Colaborator": 18
+    },
+    "total": 125
+  },
+  "blockers": {
+    "question": "What’s the single biggest thing holding you back from using AI more in your day-to-day work?",
+    "responses": {
+      "I’m not sure where to start": 22,
+      "I don’t trust the output": 14,
+      "I don’t have time to learn": 48,
+      "I’m worried about getting it wrong": 2,
+      "I’m already using it well (open to learning more)": 36
+    },
+    "total": 122
+  },
+  "shifts": {
+    "responses": {
+      "Replacement shift": 28,
+      "Expertise shift": 53,
+      "Failure shift": 9
+    },
+    "total": 90
+  },
+  "word_cloud_tasks": [
+    {
+      "theme": "Other",
+      "count": 31,
+      "examples": [
+        "Ironing clothes",
+        "Optimise output",
+        "HTML / css",
+        "Summarising the very long slacks I write to be shorter and more focused",
+        "Identify regulatory changes",
+        "Customer feedback",
+        "Monitoring",
+        "get more creative with learning design",
+        "Roadmaps",
+        "Helping being efficient",
+        "Writing security guidance",
+        "structure information",
+        "admin",
+        "BoB reviews",
+        "Everything",
+        "identifying campaign opportunities",
+        "Knowledge management",
+        "Understanding a flow in Salesforce",
+        "Expand Upon",
+        "Formatting",
+        "Summarise",
+        "Filling in specific documents with information from several sources",
+        "Next steps / Call to Action",
+        "build outbound strategies",
+        "Pgc",
+        "Find infos",
+        "Billing process",
+        "Promted do to list",
+        "follow up with people",
+        "Understanding the main themes in our inbound bugs",
+        "Analyze codebase"
+      ]
+    },
+    {
+      "theme": "Writing & Content",
+      "count": 26,
+      "examples": [
+        "Content development",
+        "Improving Text",
+        "Update content",
+        "Instructions writings",
+        "Comms",
+        "Communicating",
+        "Copy checking",
+        "Write documents",
+        "writing emails",
+        "Writing emails, planning my calendar",
+        "follow up emails",
+        "Rephrase",
+        "Follow-up mails",
+        "Emails",
+        "Writing content",
+        "Write e-mails",
+        "compose emails",
+        "writing",
+        "Write emails"
+      ]
+    },
+    {
+      "theme": "Data & Analysis",
+      "count": 19,
+      "examples": [
+        "Pipeline funnel analysis",
+        "Monitoring KPIs",
+        "Analysing data",
+        "Data analysis",
+        "Datadog Analysis",
+        "summarizing data",
+        "forecast",
+        "measure performance",
+        "Forecasting, Monitoring KPIs",
+        "data analysis and reporting",
+        "data analytics",
+        "Data entry",
+        "Forecasting",
+        "data and reporting"
+      ]
+    },
+    {
+      "theme": "Research & Strategy",
+      "count": 18,
+      "examples": [
+        "ideation",
+        "brainstorming",
+        "research",
+        "planning initiatives",
+        "Campaign/Prject ideation and management",
+        "Explore options for solutions",
+        "Strategic thinking",
+        "Understand a problem",
+        "advanced (re)search",
+        "Understand topics",
+        "Planning",
+        "Understand things",
+        "Account Research"
+      ]
+    },
+    {
+      "theme": "Code & Technical",
+      "count": 14,
+      "examples": [
+        "light coding",
+        "Write code",
+        "Boilerplate",
+        "Dashboard construction",
+        "Operational testing",
+        "Bug fixes",
+        "Building a prototype",
+        "Analysing a code base",
+        "Writing unit test cases",
+        "Scripts",
+        "Bug analysis",
+        "Check for false-positive bugs"
+      ]
+    },
+    {
+      "theme": "Automation & Workflow",
+      "count": 13,
+      "examples": [
+        "structure tasks",
+        "task planning",
+        "Project management",
+        "periodic tasks",
+        "Automate task",
+        "Automation",
+        "Scheduling",
+        "automate",
+        "Time management",
+        "Business process",
+        "Onboarding scheduling"
+      ]
+    },
+    {
+      "theme": "Reporting",
+      "count": 10,
+      "examples": [
+        "Weekly reports",
+        "summarising OKR status",
+        "Call Summaries",
+        "Weekly updates",
+        "posting updates",
+        "Reporting"
+      ]
+    },
+    {
+      "theme": "Coaching & People",
+      "count": 6,
+      "examples": [
+        "checking my thinking",
+        "coaching",
+        "coaching Gong Calls fom ICs",
+        "Soundboarding",
+        "Persona building",
+        "Enablement"
+      ]
+    },
+    {
+      "theme": "Translation",
+      "count": 3,
+      "examples": [
+        "Translations",
+        "Translating",
+        "Translate"
+      ]
+    }
+  ],
+  "word_cloud_blockers": [
+    {
+      "theme": "Time",
+      "count": 17,
+      "examples": [
+        "to timeconsuming to correct",
+        "time to learn (e.g. n8n)",
+        "initial setup time",
+        "Lack of time",
+        "time"
+      ]
+    },
+    {
+      "theme": "Tool & System Issues",
+      "count": 12,
+      "examples": [
+        "setup issues",
+        "Integrations dont work",
+        "System limitations",
+        "Claude credits already used up",
+        "Tool",
+        "Missing context integration",
+        "availability in systems",
+        "Fundamental data structures weak",
+        "Missing Integration",
+        "Cost",
+        "Rate limiting"
+      ]
+    },
+    {
+      "theme": "Knowledge & Skills",
+      "count": 10,
+      "examples": [
+        "Don't know where to start",
+        "how to start",
+        "Not knowing how to take it further",
+        "unsure about how to prompt",
+        "Insufficient prompt engineering",
+        "Lack of knowledge",
+        "Knowledge gap"
+      ]
+    },
+    {
+      "theme": "Trust & Quality",
+      "count": 10,
+      "examples": [
+        "wrong outputs",
+        "hallucinations",
+        "The generic answers",
+        "Quality of output",
+        "failure rate",
+        "quality of sources",
+        "Accuracy",
+        "Errors"
+      ]
+    },
+    {
+      "theme": "Data & Security",
+      "count": 5,
+      "examples": [
+        "Confidentiality",
+        "Data security",
+        "Sensitive data",
+        "Data security concerns"
+      ]
+    },
+    {
+      "theme": "Complexity",
+      "count": 5,
+      "examples": [
+        "To complex and bad outcome",
+        "too much info but no practical use case",
+        "The root cause of inbound bugs is very nuanced and hard to bucket without deep domain context",
+        "Context",
+        "Task seems too complex"
+      ]
+    },
+    {
+      "theme": "Ethics & Values",
+      "count": 4,
+      "examples": [
+        "ethical and values",
+        "ownership of results",
+        "ethical",
+        "ethical concerns"
+      ]
+    },
+    {
+      "theme": "Already Using / No Blocker",
+      "count": 4,
+      "examples": [
+        "Literally nothing. Iv",
+        "nothing - I already do, but it could be less clicks",
+        "Nothing"
+      ]
+    },
+    {
+      "theme": "Other",
+      "count": 4,
+      "examples": [
+        "Process feedback (how do I know what I've done is a good approach)",
+        "trust",
+        "Not confidence",
+        "Imposter syndrome"
+      ]
+    }
+  ],
+  "atomic_actions": {
+    "responses": {
+      "The First Experiment": 10,
+      "The Verification Question": 23,
+      "Both": 20
+    },
+    "total": 53
+  },
+  "self_reflection": {
+    "question": "Where are you right now with AI at work?",
+    "responses": {
+      "Still figuring out": 1,
+      "Curious but haven't started": 2,
+      "Experimenting, hit and miss": 10,
+      "Using regularly": 20,
+      "Use confidently and critically": 14
+    },
+    "total": 47
+  },
+  "satisfaction": {
+    "overall": {
+      "mean": 4.1,
+      "distribution": {
+        "3": 9,
+        "4": 23,
+        "5": 15
+      },
+      "total": 47
+    },
+    "facilitator_expertise": {
+      "mean": 4.6,
+      "distribution": {
+        "3": 3,
+        "4": 11,
+        "5": 33
+      },
+      "total": 47
+    },
+    "recommend": {
+      "mean": 4.3,
+      "distribution": {
+        "2": 1,
+        "3": 8,
+        "4": 14,
+        "5": 24
+      },
+      "total": 47
+    }
+  },
+  "qualitative_highlights": [
+    {
+      "text": "Have the answers for the poll show after a large proportion have submitted their answer",
+      "theme": "improvement"
+    },
+    {
+      "text": "One of my personal blockers to adopt AI is actually a human and emotional one - AI feels very unhuman. It is another technical addition in a crazy world full of business terms, KPIs, data, code, ... and even worse: Way harder to grasp. Where I can think myself in the world of KPIs, Business terms, code, ... on a rational level, this is way harder with LLMs and AI. AI is scary and incomprehensible on how it works. A weird entity doing things on it's own. This might be a little personal battle of mine, but I can imagine that others are as \"frightened\" as me. Adding some input on how to overcome these \"fears\" and learn on how to involve AI as a trusted addition to your life could be a little element to add in your workshop for future iterations. 😊",
+      "theme": "improvement"
+    },
+    {
+      "text": "I attended both the Langdock training and the AI Foundations training. I think it would have been good to mention in the calendar invite that this Foundations session was not going to involve any hands-on experimentation with AI tools. Based on the calendar invite, especially the call out to \"Bring a Challenge: Think of one recurring task (like research or summarization) you’d like to explore automating.\" I was expecting we would have the chance to be guided through thinking how we could automate our example, but this was not covered. After the first break I thought \"ah, now we've done the intro we'll get into the hands-on bit\" but it never came.\n\nOverall the session was OK, if a bit high-level for people who are already dabbling with the different models and were expecting more content on \"Navigate the Tool Landscape: Identify which approved tool is most appropriate for specific tasks across content and research.\" as teased in the calendar invite. Similar to the Langdock session, I think it's tricky to design a session that covers both people who are very reluctant to use AI / aren't using it at all yet, all the way to people in more technical roles that may already be using it extensively.\n\nI'm giving it a 2* on recommendation not because it was a bad session - I thought the presenters were good and knowledgeable especially [facilitator]. The session was well-paced for what it wanted to cover, and I appreciated the breaks. But it didn't deliver on what I was expecting from the session and so I feel a little disappointed that I cleared my calendar and dedicated 2 hours to it when I could have spent that time experimenting/putting the theory into practice.\n\nAlso, a recommendation to double check slides before they are presented - having a picture of the PayFit CEO next to a supposed quote from Jonas was (a) likely revealing another Oli customer (!) and (b) immediately decreased the audience's trust in the presenter, which was a shame, as like I said they were actually great!",
+      "theme": "mixed"
+    },
+    {
+      "text": "I understand it is geared to all levels, but as someone that has started playing around with it it felt a bit basic. But again, appreciate its about getting everyone on the same page before we start. Two topics that 'concern me' that we did not talk about as much are: \n- I find when I have not come up with a first draft or idea, I lack the kind of depth that good work takes. I do not feel the same level of expertise defending something I drafted vs. editting. I would say I am very comfortable using it, but realising I feel too detached from the outcome \n- Building on that, whatever AI comes up with I am the one having to answer for it. So trusting it to come up to something that is at a quality level I can stand behind is where I am most stuck. Ultimately my work speaks for me, and delegating that is difficult\n\nI hope this helps!",
+      "theme": "improvement"
+    },
+    {
+      "text": "More time spent on practical use please and less on the questions upfront.",
+      "theme": "improvement"
+    },
+    {
+      "text": "Loved it! Thank you for the breaks, we are not used to them on these workshops. Also, really useful to see the different usecases from different perspectives",
+      "theme": "positive"
+    },
+    {
+      "text": "No improvements suggested at all! I'm so impressed with this workshop, every bit of time was used so well, it was engaging and it addressed the topic of how overwhelming learning AI feels nowadays. The knowledge was also very practical and the suggestions for how to make the learnings more regular and in small chunks feel realistic. I also really liked the suggested exercises that we'll be taking away.\nGreat use of Slido to keep audience engagement, and the knowledge and approach from both facilitators was flawless -- you were both natural, clear speakers that made everything you said easy to understand for all levels of AI expertise and for non-English speakers.\nI'm so grateful for your time!",
+      "theme": "positive"
+    },
+    {
+      "text": "Maybe you could make it even more practical by asking people to bring their own examples and do some exercises live with the audience (depending on the proficiency level, send a survey in advacne?). Thank you so much!!",
+      "theme": "mixed"
+    },
+    {
+      "text": "Some visualisations for the examples real live cases mentioned.",
+      "theme": "improvement"
+    },
+    {
+      "text": "what were the supposed takeaways for me?\nit felt like an intro session more than ever. \nLooking fwd to learn something new 😊",
+      "theme": "improvement"
+    },
+    {
+      "text": "Loved the breaks, but even then 2 hours was long and lost engagement at the very end",
+      "theme": "mixed"
+    },
+    {
+      "text": "More time to chat amongst ourselves/Q&A as we often have similar qs on models and tools.",
+      "theme": "improvement"
+    },
+    {
+      "text": "Would like some even better use cases that are related too roles that many colleagues have as for example Sales (AE, SDR)",
+      "theme": "improvement"
+    },
+    {
+      "text": "I would have loved to see the examples built in Langdock, since this is the interface we are familiar with.",
+      "theme": "improvement"
+    },
+    {
+      "text": "make it more interactive, like breakout rooms. Maybe even in smaller groups with in office presence.",
+      "theme": "improvement"
+    },
+    {
+      "text": "More hands-on",
+      "theme": "improvement"
+    },
+    {
+      "text": "Nothing to add. I love the intentional breaks. I loved the calm presenter style and the interactive question pieces via slido",
+      "theme": "positive"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "programme_name": "AI Momentum",
+  "organisation": "Personio",
+  "total_employees": 1400,
+  "certification_target_h1": 0.4,
+  "certification_target_eoy": 1.0,
+  "topics": [
+    { "number": 1, "name": "AI Foundations", "status": "delivering" },
+    { "number": 2, "name": "Execution & Automation", "status": "planned" },
+    { "number": 3, "name": "Systems Thinking", "status": "planned" },
+    { "number": 4, "name": "Data Literacy", "status": "planned" }
+  ],
+  "cohorts": ["t1-c1"],
+  "expectations_correct_answers": {
+    "AI can reliably summarise a 40-page document without missing key details.": "It Depends",
+    "AI understands what it writes.": "False",
+    "AI is only useful if you work in a technical role.": "False",
+    "If AI gives you a wrong answer, it's because you asked the wrong question.": "Partly True",
+    "Companies that adopt AI effectively will outperform those that don't.": "True"
+  },
+  "shift_descriptions": {
+    "Replacement shift": {
+      "from": "AI will replace me",
+      "to": "AI handles the repetitive stuff so I can focus on what actually needs me"
+    },
+    "Expertise shift": {
+      "from": "I need to be an expert first",
+      "to": "I learn by doing, and imperfect first attempts are how skills develop"
+    },
+    "Failure shift": {
+      "from": "What if I get it wrong?",
+      "to": "What if I don't try and get left behind?"
+    }
+  },
+  "ai_spectrum_descriptions": {
+    "L1 - Search Engine": "Using AI to look things up",
+    "L2 - First Draft": "Getting AI to create a starting point",
+    "L3 - Thinking Partner": "Using AI to challenge and refine your thinking",
+    "L4 - Workflow Collaborator": "Integrating AI into your daily workflow"
+  },
+  "atomic_action_descriptions": {
+    "The First Experiment": "Try one AI-assisted task this week",
+    "The Verification Question": "Before trusting AI output, ask: How would I verify this?",
+    "Both": "Commit to both actions"
+  }
+}

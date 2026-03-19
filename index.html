@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Momentum Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Sticky Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="header-logos">
+          <img src="assets/personio-logo.png" alt="Personio" class="header-logo header-logo--personio">
+          <span class="header-logo-divider"></span>
+          <img src="assets/oli-logo.png" alt="Oliva Health" class="header-logo header-logo--oli">
+        </div>
+        <a href="#hero" class="logo">AI Momentum</a>
+      </div>
+      <div class="header-controls">
+        <label for="cohort-select" class="sr-only">Select cohort</label>
+        <select id="cohort-select" class="cohort-select">
+          <option value="">Loading...</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Section 1: Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <div class="hero-partnership">
+          <img src="assets/personio-logo.png" alt="Personio" class="hero-logo hero-logo--personio">
+          <span class="hero-logo-x">&times;</span>
+          <img src="assets/oli-logo.png" alt="Oliva Health" class="hero-logo hero-logo--oli">
+        </div>
+        <p class="hero-eyebrow" id="hero-eyebrow">Topic 1 &middot; Cohort 1 &middot; 18 March 2026</p>
+        <h1 class="hero-title" id="hero-title">AI Foundations</h1>
+        <p class="hero-description">Delivery dashboard for the AI Momentum programme &mdash; Personio's organisation-wide AI certification initiative, co-delivered by Oliva Health.</p>
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <span class="metric-value" data-target="238" id="metric-registered">0</span>
+            <span class="metric-label">Registered</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-value" data-target="145" id="metric-polls">0</span>
+            <span class="metric-label">Active in Polls</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-value" data-target="47" id="metric-eval">0</span>
+            <span class="metric-label">Evaluation Responses</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: About This Session -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About This Session</h2>
+          <p class="section-subtitle">What was delivered, why, and how</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="about-card-title">Format</h3>
+            <p class="about-card-text">2-hour virtual session (Zoom) with ~200 participants per cohort. Three cohorts scheduled across the week to maximise attendance across time zones and teams.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="about-card-title">Co-Facilitated</h3>
+            <p class="about-card-text">Two facilitators work in tandem: Alex covers AI knowledge, practical demos, and use-case design. Glenn leads behavioural coaching, mindset shifts, and habit formation using the COM-B model.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 class="about-card-title">Purpose</h3>
+            <p class="about-card-text">Build a shared understanding of what AI is and isn't, introduce the AI Spectrum framework, reframe common fears around adoption, and equip every participant with a concrete action to try this week.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3 class="about-card-title">What Was Covered</h3>
+            <p class="about-card-text">The session had four blocks: setting expectations through interactive polls, reframing mindsets around AI adoption, live demonstrations of AI at four proficiency levels, and committing to Atomic Actions for the week ahead.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Expectations vs Reality -->
+    <section class="section section--grey" id="expectations">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="expectations-title">Expectations vs Reality</h2>
+          <p class="section-subtitle" id="expectations-subtitle">Participants voted on five common AI statements to surface assumptions and misconceptions. Each statement was then discussed, with the correct answer revealed. This exercise calibrates the room's starting knowledge and creates a shared foundation for the rest of the session.</p>
+        </div>
+        <div class="chart-card">
+          <div class="chart-container chart-container--tall">
+            <canvas id="expectations-chart"></canvas>
+          </div>
+        </div>
+        <div class="insight-box" id="expectations-insight">
+          <div class="insight-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <p class="insight-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: AI Spectrum + Blockers -->
+    <section class="section" id="spectrum-blockers">
+      <div class="container">
+        <div class="grid-two">
+          <!-- AI Spectrum -->
+          <div class="chart-card">
+            <h3 class="card-title" id="spectrum-title">AI Spectrum Self-Assessment</h3>
+            <p class="card-subtitle" id="spectrum-subtitle">The AI Spectrum is the programme's core framework. It describes four levels of AI usage &mdash; from <strong>Search Engine</strong> (using AI to look things up) through <strong>First Draft</strong> (getting AI to create a starting point) and <strong>Thinking Partner</strong> (using AI to challenge your thinking) to <strong>Workflow Collaborator</strong> (integrating AI into daily workflows). Participants self-assessed where they currently sit.</p>
+            <div class="chart-container chart-container--donut">
+              <canvas id="spectrum-chart"></canvas>
+            </div>
+            <div class="donut-legend" id="spectrum-legend"></div>
+          </div>
+          <!-- Blockers -->
+          <div class="chart-card">
+            <h3 class="card-title" id="blockers-title">Biggest Blockers</h3>
+            <p class="card-subtitle" id="blockers-subtitle">Participants identified the single biggest barrier preventing them from using AI more. This data directly shapes future session content and helps prioritise where the programme focuses its energy.</p>
+            <div class="chart-container">
+              <canvas id="blockers-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Which Shift Resonates -->
+    <section class="section section--grey" id="shifts">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="shifts-title">Which Mindset Shift Resonates Most?</h2>
+          <p class="section-subtitle" id="shifts-subtitle">Three common fears were reframed as empowering perspectives. Each shift addresses a real adoption barrier identified in the pre-programme AI Survey of 372 employees. Participants voted on which reframe resonated most with their own experience.</p>
+        </div>
+        <div class="shifts-grid" id="shifts-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: What People Want to Use AI For -->
+    <section class="section" id="use-cases">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="use-title">What People Want to Use AI For</h2>
+          <p class="section-subtitle" id="use-subtitle">In a live word cloud exercise, participants shared the tasks they do regularly that they believe AI could help with. Responses have been grouped into themes. This data feeds directly into the design of Topics 2-4 and helps AI Council ambassadors tailor adoption support for their teams.</p>
+        </div>
+        <div class="chart-card">
+          <div class="chart-container chart-container--tall">
+            <canvas id="use-chart"></canvas>
+          </div>
+          <div class="theme-examples" id="use-examples">
+            <p class="theme-examples-hint">Hover over a bar to see example responses</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: What's Stopping Them -->
+    <section class="section section--grey" id="stopping">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="stopping-title">What's Stopping Them</h2>
+          <p class="section-subtitle" id="stopping-subtitle">Immediately after naming their first AI task, participants shared what has prevented them from trying it. Surfacing blockers alongside aspirations creates a clear picture of where support is most needed.</p>
+        </div>
+        <div class="chart-card">
+          <div class="chart-container chart-container--tall">
+            <canvas id="stopping-chart"></canvas>
+          </div>
+          <div class="theme-examples" id="stopping-examples">
+            <p class="theme-examples-hint">Hover over a bar to see example responses</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Atomic Actions + Self-Reflection -->
+    <section class="section" id="actions-reflection">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Commitments &amp; Reflection</h2>
+          <p class="section-subtitle">At the close of the session, participants made a concrete commitment and reflected on where they are with AI at work.</p>
+        </div>
+        <div class="grid-two">
+          <!-- Atomic Actions -->
+          <div class="chart-card">
+            <h3 class="card-title" id="actions-title">Atomic Actions Chosen</h3>
+            <p class="card-subtitle" id="actions-subtitle">Atomic Actions are small, repeatable commitments designed to build AI habits &mdash; inspired by the Tiny Habits framework. Each takes less than 5 minutes. <strong>The First Experiment</strong> means trying one AI-assisted task this week. <strong>The Verification Question</strong> means building the habit of asking "How would I verify this?" before trusting AI output. Participants who chose <strong>Both</strong> committed to trying both actions.</p>
+            <div class="chart-container chart-container--donut">
+              <canvas id="actions-chart"></canvas>
+            </div>
+            <div class="donut-legend" id="actions-legend"></div>
+          </div>
+          <!-- Self-Reflection -->
+          <div class="chart-card">
+            <h3 class="card-title" id="reflection-title">Self-Reflection</h3>
+            <p class="card-subtitle" id="reflection-subtitle">At the end of the session, participants reflected on where they see themselves with AI at work &mdash; from "still figuring it out" to "using it confidently and critically." This provides a snapshot of the room's readiness and helps calibrate the depth of future sessions.</p>
+            <div class="chart-container">
+              <canvas id="reflection-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Satisfaction Scores -->
+    <section class="section section--grey" id="satisfaction">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="satisfaction-title">Session Satisfaction</h2>
+          <p class="section-subtitle" id="satisfaction-subtitle">Anonymous post-session evaluation collected via Slido. Participants rated the session on a 1-5 scale across three dimensions.</p>
+          <div class="disclaimer-box">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L1 14h14L8 1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 6v3M8 11.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p>These scores are based on <strong>47 responses</strong> out of 238 registered participants (20% response rate). Final ratings will be updated once the full post-session evaluation is collected from all participants.</p>
+          </div>
+        </div>
+        <div class="satisfaction-grid" id="satisfaction-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: What Participants Said -->
+    <section class="section" id="feedback">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="feedback-title">What Participants Said</h2>
+          <p class="section-subtitle" id="feedback-subtitle">Anonymised qualitative feedback from the post-session evaluation. Responses are tagged as positive, constructive suggestions for improvement, or mixed (containing both).</p>
+        </div>
+        <div class="feedback-filters" id="feedback-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="positive">Positive</button>
+          <button class="filter-btn" data-filter="improvement">Improvement</button>
+          <button class="filter-btn" data-filter="mixed">Mixed</button>
+        </div>
+        <div class="feedback-grid" id="feedback-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 10: Programme Progress -->
+    <section class="section section--grey" id="progress">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Programme Progress</h2>
+          <p class="section-subtitle">AI Momentum targets 40% certification by end of H1 2026 and 100% by end of 2026. Certification requires attendance at all 4 Baseline Sessions, Adoption Group participation, a documented use case, and manager attestation.</p>
+        </div>
+        <div class="progress-card">
+          <div class="progress-stats">
+            <div class="progress-stat-main">
+              <span class="progress-number" id="progress-reached">238</span>
+              <span class="progress-label">of <span id="progress-total">1,400</span> employees reached</span>
+            </div>
+            <div class="progress-stat-secondary">
+              <span class="progress-number-sm" id="progress-sessions">1</span>
+              <span class="progress-label">sessions delivered</span>
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="progress-fill"></div>
+              <div class="progress-marker" id="marker-h1" style="left: 40%">
+                <span class="marker-label">H1 Target (40%)</span>
+                <span class="marker-line"></span>
+              </div>
+              <div class="progress-marker" id="marker-eoy" style="left: 100%">
+                <span class="marker-label">EOY Target (100%)</span>
+                <span class="marker-line"></span>
+              </div>
+            </div>
+            <div class="progress-percentage" id="progress-pct">17%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logos">
+        <img src="assets/personio-logo.png" alt="Personio" class="footer-logo footer-logo--personio">
+        <span class="footer-logo-x">&times;</span>
+        <img src="assets/oli-logo.png" alt="Oliva Health" class="footer-logo footer-logo--oli">
+      </div>
+      <p class="footer-title">AI Momentum &mdash; Personio AI Certification Programme</p>
+      <p class="footer-note">Co-delivered by Oliva Health &middot; Dashboard generated from anonymised session data</p>
+    </div>
+  </footer>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
