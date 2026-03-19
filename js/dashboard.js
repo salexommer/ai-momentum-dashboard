@@ -31,7 +31,7 @@
     donut3: ['#4B2AAD', '#6B4FCC', '#FF6B35'],
     /* Satisfaction ring */
     ringFill: '#4B2AAD',
-    ringTrack: '#E5E7EB',
+    ringTrack: isDarkMode ? '#374151' : '#E5E7EB',
   };
 
   /* ---------- Chart.js Global Defaults ---------- */
@@ -44,6 +44,34 @@
   Chart.defaults.plugins.tooltip.padding = 12;
   Chart.defaults.plugins.tooltip.titleFont = { weight: '600', size: 14 };
   Chart.defaults.plugins.tooltip.bodyFont = { size: 13 };
+
+  /* ---------- Dark Mode Detection ---------- */
+  var isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var chartFontColor = isDarkMode ? '#9CA3AF' : '#6B7280';
+  var chartGridColor = isDarkMode ? '#374151' : '#F3F4F6';
+  Chart.defaults.color = chartFontColor;
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      isDarkMode = e.matches;
+      chartFontColor = isDarkMode ? '#9CA3AF' : '#6B7280';
+      chartGridColor = isDarkMode ? '#374151' : '#F3F4F6';
+      Chart.defaults.color = chartFontColor;
+      if (cohortData) renderAll();
+    });
+  }
+
+  /* ---------- Chart Insights ---------- */
+  var CHART_INSIGHTS = {
+    expectations: 'Most participants correctly identified that AI doesn\'t truly understand language. The splits on nuanced statements show a healthy mix of critical thinking — exactly the foundation the programme aims to build.',
+    spectrum: '56% of participants self-assessed at Level 3 (Thinking Partner), suggesting this cohort is more advanced than typical starting populations. Only 2% are at the basic Search Engine level, indicating strong existing familiarity with AI.',
+    blockers: 'Time is the dominant barrier at 39%, not trust or skills gaps. 30% report they\'re already using AI well — the real challenge is expansion and deepening, not initial adoption.',
+    shifts: 'The Expertise Shift resonated most strongly (59%), indicating the biggest mindset barrier is feeling they need to be experts before starting. Permission to learn by doing is the most impactful reframe.',
+    use: 'Writing & Content and Data & Analysis dominate, aligning closely with the pre-programme AI Survey (38% content creation, 24% research). The diversity across 9 themes shows AI potential is recognised across every function.',
+    stopping: 'Time and tooling issues outweigh trust or skills concerns — participants want to use AI but face practical barriers. This directly informs the design of Topics 2-4 and Adoption Group priorities.',
+    actions: '81% committed to the Verification Question (alone or combined), showing strong buy-in for the critical thinking habit. This is the programme\'s most important behavioural outcome.',
+    reflection: '72% report using AI regularly or confidently, while 28% are still experimenting or earlier. This validates the programme\'s multi-level approach of meeting people where they are on the AI Spectrum.',
+  };
 
   /* ---------- State ---------- */
   let config = null;
@@ -198,6 +226,11 @@
       { text: 'Loved it! Great use of breaks and different perspectives.', theme: 'positive' },
       { text: 'Would have liked more hands-on practical exercises.', theme: 'improvement' },
       { text: 'Good session overall but 2 hours felt long towards the end.', theme: 'mixed' },
+    ],
+    chat_highlights: [
+      { text: 'Love that you added this short break', reactions: 9, reaction_type: 'heart' },
+      { text: 'This was a great session', reactions: 0 },
+      { text: '5/5 would recommend', reactions: 0 },
     ],
   };
 
@@ -439,9 +472,21 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            var expLabels = expectations.map(function (e) { return e.statement.length > 50 ? e.statement.substring(0, 50) + '...' : e.statement; });
+            var expTotals = expectations.map(function (e) { return e.total; });
+            var grandTotal = expTotals.reduce(function (a, b) { return a + b; }, 0);
+            toggleDetailPanel('expectations', document.getElementById('expectations').querySelector('.chart-card'), {
+              labels: expLabels,
+              values: expTotals,
+              total: grandTotal,
+            }, CHART_INSIGHTS.expectations);
+          }
+        },
         scales: {
           x: {
-            grid: { display: true, color: '#F3F4F6' },
+            grid: { display: true, color: chartGridColor },
             ticks: { stepSize: 20 },
             title: { display: true, text: 'Number of responses', color: '#9CA3AF', font: { size: 11 } },
           },
@@ -551,7 +596,7 @@
           data: counts,
           backgroundColor: COLOURS.spectrum,
           borderWidth: 2,
-          borderColor: '#fff',
+          borderColor: isDarkMode ? '#232340' : '#fff',
           hoverOffset: 6,
         }],
       },
@@ -559,6 +604,15 @@
         responsive: true,
         maintainAspectRatio: true,
         cutout: '68%',
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            toggleDetailPanel('spectrum', document.getElementById('spectrum-chart').closest('.chart-card'), {
+              labels: labels,
+              values: counts,
+              total: total,
+            }, CHART_INSIGHTS.spectrum);
+          }
+        },
         plugins: {
           tooltip: {
             callbacks: {
@@ -579,7 +633,7 @@
           ctx2.textAlign = 'center';
           ctx2.textBaseline = 'middle';
           ctx2.font = '700 1.5rem ' + Chart.defaults.font.family;
-          ctx2.fillStyle = '#1A1A2E';
+          ctx2.fillStyle = isDarkMode ? '#E5E7EB' : '#1A1A2E';
           ctx2.fillText(total, cx, cy - 8);
           ctx2.font = '400 0.75rem ' + Chart.defaults.font.family;
           ctx2.fillStyle = '#9CA3AF';
@@ -619,8 +673,17 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            toggleDetailPanel('blockers', document.getElementById('blockers-chart').closest('.chart-card'), {
+              labels: labels,
+              values: counts,
+              total: total,
+            }, CHART_INSIGHTS.blockers);
+          }
+        },
         scales: {
-          x: { grid: { display: true, color: '#F3F4F6' }, ticks: { stepSize: 10 } },
+          x: { grid: { display: true, color: chartGridColor }, ticks: { stepSize: 10 } },
           y: {
             grid: { display: false },
             ticks: {
@@ -724,6 +787,7 @@
 
     destroyChart('use');
     var ctx = document.getElementById('use-chart').getContext('2d');
+    var useTotalCount = counts.reduce(function (a, b) { return a + b; }, 0);
     charts.use = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -740,8 +804,17 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            toggleDetailPanel('use', document.getElementById('use-cases').querySelector('.chart-card'), {
+              labels: labels,
+              values: counts,
+              total: useTotalCount,
+            }, CHART_INSIGHTS.use);
+          }
+        },
         scales: {
-          x: { grid: { display: true, color: '#F3F4F6' } },
+          x: { grid: { display: true, color: chartGridColor } },
           y: { grid: { display: false }, ticks: { font: { size: 13 } } },
         },
         plugins: {
@@ -791,6 +864,7 @@
 
     destroyChart('stopping');
     var ctx = document.getElementById('stopping-chart').getContext('2d');
+    var stoppingTotalCount = counts.reduce(function (a, b) { return a + b; }, 0);
     charts.stopping = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -807,8 +881,17 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            toggleDetailPanel('stopping', document.getElementById('stopping').querySelector('.chart-card'), {
+              labels: labels,
+              values: counts,
+              total: stoppingTotalCount,
+            }, CHART_INSIGHTS.stopping);
+          }
+        },
         scales: {
-          x: { grid: { display: true, color: '#F3F4F6' } },
+          x: { grid: { display: true, color: chartGridColor } },
           y: { grid: { display: false }, ticks: { font: { size: 13 } } },
         },
         plugins: {
@@ -917,6 +1000,60 @@
     return div.innerHTML;
   }
 
+  /* --- Sticky Chart Detail Panel --- */
+  function toggleDetailPanel(key, container, data, insight) {
+    var existing = container.querySelector('.chart-detail-panel');
+    if (existing) {
+      existing.remove();
+      return;
+    }
+
+    var panel = document.createElement('div');
+    panel.className = 'chart-detail-panel';
+
+    var showAll = data.labels.length <= 5;
+    var valuesHtml = '<div class="detail-values">';
+    data.labels.forEach(function (label, i) {
+      var pctVal = pct(data.values[i], data.total);
+      var hiddenClass = (!showAll && i >= 3) ? ' detail-value-hidden' : '';
+      valuesHtml +=
+        '<div class="detail-value-row' + hiddenClass + '">' +
+        '<span class="detail-value-label">' + escapeHtml(label) + '</span>' +
+        '<span class="detail-value-bar"><span class="detail-value-fill" style="width:' + pctVal + '%"></span></span>' +
+        '<span class="detail-value-num">' + data.values[i] + ' (' + pctVal + '%)</span>' +
+        '</div>';
+    });
+    if (!showAll) {
+      valuesHtml += '<button class="detail-expand-btn">Show all ' + data.labels.length + ' values</button>';
+    }
+    valuesHtml += '</div>';
+
+    var insightHtml =
+      '<div class="detail-insight">' +
+      '<div class="detail-insight-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>' +
+      '<p class="detail-insight-text">' + insight + '</p>' +
+      '</div>';
+
+    var closeHtml = '<button class="detail-close-btn" aria-label="Close">&times;</button>';
+
+    panel.innerHTML = closeHtml + valuesHtml + insightHtml;
+    container.appendChild(panel);
+
+    panel.querySelector('.detail-close-btn').addEventListener('click', function () {
+      panel.remove();
+    });
+
+    var expandBtn = panel.querySelector('.detail-expand-btn');
+    if (expandBtn) {
+      expandBtn.addEventListener('click', function () {
+        panel.querySelectorAll('.detail-value-hidden').forEach(function (el) {
+          el.classList.remove('detail-value-hidden');
+        });
+        expandBtn.remove();
+      });
+    }
+  }
+
   /* --- Atomic Actions Donut --- */
   function renderAtomicActions() {
     var aa = cohortData.atomic_actions;
@@ -950,7 +1087,7 @@
           data: counts,
           backgroundColor: COLOURS.donut3,
           borderWidth: 2,
-          borderColor: '#fff',
+          borderColor: isDarkMode ? '#232340' : '#fff',
           hoverOffset: 6,
         }],
       },
@@ -958,6 +1095,15 @@
         responsive: true,
         maintainAspectRatio: true,
         cutout: '68%',
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            toggleDetailPanel('actions', document.getElementById('actions-chart').closest('.chart-card'), {
+              labels: labels,
+              values: counts,
+              total: total,
+            }, CHART_INSIGHTS.actions);
+          }
+        },
         plugins: {
           tooltip: {
             callbacks: {
@@ -978,7 +1124,7 @@
           ctx2.textAlign = 'center';
           ctx2.textBaseline = 'middle';
           ctx2.font = '700 1.5rem ' + Chart.defaults.font.family;
-          ctx2.fillStyle = '#1A1A2E';
+          ctx2.fillStyle = isDarkMode ? '#E5E7EB' : '#1A1A2E';
           ctx2.fillText(total, cx, cy - 8);
           ctx2.font = '400 0.75rem ' + Chart.defaults.font.family;
           ctx2.fillStyle = '#9CA3AF';
@@ -1022,8 +1168,17 @@
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        onClick: function (event, elements) {
+          if (elements.length > 0) {
+            toggleDetailPanel('reflection', document.getElementById('reflection-chart').closest('.chart-card'), {
+              labels: labels,
+              values: counts,
+              total: total,
+            }, CHART_INSIGHTS.reflection);
+          }
+        },
         scales: {
-          x: { grid: { display: true, color: '#F3F4F6' } },
+          x: { grid: { display: true, color: chartGridColor } },
           y: {
             grid: { display: false },
             ticks: {
@@ -1226,6 +1381,33 @@
     });
   }
 
+  /* --- Chat Highlights --- */
+  function renderChatHighlights() {
+    var highlights = cohortData.chat_highlights;
+    var grid = document.getElementById('chat-highlights-grid');
+    var container = document.getElementById('chat-highlights');
+    if (!highlights || !highlights.length) {
+      if (container) container.style.display = 'none';
+      return;
+    }
+    if (container) container.style.display = '';
+    grid.innerHTML = '';
+
+    highlights.forEach(function (h) {
+      var bubble = document.createElement('div');
+      bubble.className = 'chat-bubble';
+      var reactionHtml = '';
+      if (h.reactions && h.reactions > 0) {
+        var emoji = h.reaction_type === 'heart' ? '\u2764\uFE0F' :
+                    h.reaction_type === 'rocket' ? '\uD83D\uDE80' :
+                    h.reaction_type === 'hundred' ? '\uD83D\uDCAF' : '\uD83D\uDC4D';
+        reactionHtml = '<span class="chat-reaction">' + emoji + ' ' + h.reactions + '</span>';
+      }
+      bubble.innerHTML = '"' + escapeHtml(h.text) + '"' + reactionHtml;
+      grid.appendChild(bubble);
+    });
+  }
+
   /* --- Programme Progress --- */
   function renderProgress() {
     var prog = cohortData.programme_progress;
@@ -1269,6 +1451,7 @@
     renderSelfReflection();
     renderSatisfaction();
     renderFeedback();
+    renderChatHighlights();
     renderProgress();
   }
 
@@ -1279,7 +1462,6 @@
   async function init() {
     initHeader();
     await loadConfig();
-    populateCohortDropdown();
 
     // Load first cohort
     var firstCohort = (config.cohorts && config.cohorts[0]) || 't1-c1';

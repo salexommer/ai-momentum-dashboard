@@ -24,10 +24,6 @@
         <a href="#hero" class="logo">AI Momentum</a>
       </div>
       <div class="header-controls">
-        <label for="cohort-select" class="sr-only">Select cohort</label>
-        <select id="cohort-select" class="cohort-select">
-          <option value="">Loading...</option>
-        </select>
       </div>
     </div>
   </header>
@@ -237,8 +233,15 @@
             <p>These scores are based on <strong>47 responses</strong> out of 238 registered participants (20% response rate). Final ratings will be updated once the full post-session evaluation is collected from all participants.</p>
           </div>
         </div>
-        <div class="satisfaction-grid" id="satisfaction-grid">
+        <div class="satisfaction-grid satisfaction-muted" id="satisfaction-grid">
           <!-- Populated by JS -->
+        </div>
+        <div class="chat-highlights" id="chat-highlights">
+          <h3 class="chat-highlights-title">Live Chat Reactions</h3>
+          <p class="chat-highlights-subtitle">Anonymised messages from the Zoom chat during the session — 25+ thank-you messages at close</p>
+          <div class="chat-highlights-grid" id="chat-highlights-grid">
+            <!-- Populated by JS -->
+          </div>
         </div>
       </div>
     </section>
@@ -310,6 +313,7 @@
       </div>
       <p class="footer-title">AI Momentum &mdash; Personio AI Certification Programme</p>
       <p class="footer-note">Co-delivered by Oliva Health &middot; Dashboard generated from anonymised session data</p>
+      <p class="footer-credit">Created by <a href="https://www.linkedin.com/in/alexander-sommer-64245467/" target="_blank" rel="noopener noreferrer" class="footer-link">Alexander Sommer</a></p>
     </div>
   </footer>
 
